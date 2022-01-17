@@ -1,0 +1,54 @@
+.tableContainer {
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    table-layout: fixed;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    margin-bottom: 10px;
+}
+
+th {
+    word-wrap: break-word;
+    text-align: center;
+    padding: 10px;
+    height: 100px;
+}
+td {
+    word-wrap: break-word;
+    text-align: left;
+    padding: 10px 20px;
+    height: 100px;
+}
+
+th {
+    background-color: #ECECF9;
+}
+
+tr:nth-child(even) {
+    background: #F8F7FD
+}
+
+tr:nth-child(odd) {
+    background: #ffffff
+}
+
+.title {
+    width: 140px;
+}
+
+.hashtag {
+    width: 140px;
+}
+
+.actions {
+    width: 120px;
+}
+
+.hashtagItem {
+    margin: 10px 5px;
+}

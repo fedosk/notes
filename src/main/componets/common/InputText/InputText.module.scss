@@ -1,0 +1,28 @@
+.inputWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    margin: 5px;
+}
+
+.errorInput {
+    border-radius: 4px;
+    background:  #ffffff;
+    min-height: 36px;
+    width: 500px;
+    padding: 0 15px;
+}
+
+.label {
+    color: rgba(36, 37, 74, 0.5);
+    font-size: 13px;
+}
+
+.inputStyle {
+    outline: none;
+    width: 347px;
+    height: 28px;
+    font-size: 16px;
+    padding: 7px;
+}

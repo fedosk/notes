@@ -7,6 +7,7 @@ import {Provider} from "react-redux";
 import {store} from "./main/store/store";
 import {HashRouter} from "react-router-dom";
 
+
 ReactDOM.render(
     <React.StrictMode>
         <HashRouter>

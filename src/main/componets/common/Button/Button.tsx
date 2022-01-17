@@ -24,38 +24,18 @@ export const Button: React.FC<SuperButtonPropsType> = (
     }
 
     let btnClassName
+
     if (classBtn === 'btn') {
         btnClassName = styles.btn
     }
-    if (classBtn === 'deleteBtn') {
-        btnClassName = `${styles.btn} ${styles.deleteBtn}`
-    }
-    if (classBtn === 'updateBtn') {
-        btnClassName = `${styles.btn} ${styles.updateBtn}`
+    if (classBtn === 'hashBtn') {
+        btnClassName = `${styles.btn} ${styles.hashBtn}`
     }
     if (classBtn === 'confirmBtn') {
         btnClassName = `${styles.btn} ${styles.confirmBtn}`
     }
-    if (classBtn === 'cancelBtn') {
-        btnClassName = `${styles.btn} ${styles.cancelBtn}`
-    }
-    if (classBtn === 'deleteBtn') {
-        btnClassName = `${styles.btn} ${styles.deleteBtn}`
-    }
     if (classBtn === 'bigDeleteBtn') {
         btnClassName = `${styles.btn} ${styles.bigDeleteBtn}`
-    }
-    if (classBtn === 'filteMyBtn') {
-        btnClassName = `${styles.btn} ${styles.filteMyBtn}`
-    }
-    if (classBtn === 'filterAllBtn') {
-        btnClassName = `${styles.btn} ${styles.filterAllBtn}`
-    }
-    if (classBtn === 'filterMyBtnActive') {
-        btnClassName = `${styles.btn} ${styles.filterMyBtnActive}`
-    }
-    if (classBtn === 'filterAllBtnActive') {
-        btnClassName = `${styles.btn} ${styles.filterAllBtnActive}`
     }
 
     return (

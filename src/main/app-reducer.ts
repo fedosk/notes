@@ -14,7 +14,7 @@ export type NoteDataType = {
     hash: string[]
 }
 
-export type InitialStateType = Array<NoteDataType>
+export type InitialStateType = NoteDataType[]
 
 const initialState: InitialStateType = []
 
@@ -23,7 +23,7 @@ export const appReducer = (state: InitialStateType = initialState, action: Actio
         case GET_NOTES_DATA:
             return [...state, ...action.data]
         case SET_NOTE:
-            return [action.noteData, ...state]
+            return [...state, action.noteData]
         case UPDATE_NOTE:
             return state.map(n => n.id === action.noteData.id ? action.noteData : n)
         case DELETE_NOTE:
@@ -34,9 +34,9 @@ export const appReducer = (state: InitialStateType = initialState, action: Actio
 }
 
 export const getNotesDataRequest = (data: InitialStateType) => ({type: GET_NOTES_DATA, data} as const)
-export const setNote = (noteData: any) => ({type: SET_NOTE, noteData} as const)
-export const updateNote = (noteData: any) => ({type: UPDATE_NOTE, noteData} as const)
-export const deleteNote = (id: any) => ({type: DELETE_NOTE, id} as const)
+export const setNote = (noteData: NoteDataType) => ({type: SET_NOTE, noteData} as const)
+export const updateNote = (noteData: NoteDataType) => ({type: UPDATE_NOTE, noteData} as const)
+export const deleteNote = (id: string) => ({type: DELETE_NOTE, id} as const)
 
 export const getNotesDataTC = () => (dispatch: Dispatch<ActionsType>) => {
     notesApi.getData()

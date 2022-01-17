@@ -1,7 +1,6 @@
 import React, {ChangeEvent, useState} from 'react';
 import styles from './EditableSpan.module.scss'
 
-
 export type EditableSpanPropsType = {
     value: string
     onChange: (newValue: string, ...rest: any) => void
@@ -20,18 +19,21 @@ export const EditableSpan = React.memo(function (props: EditableSpanPropsType) {
         setEditMode(false);
         props.onChange(value);
     }
-    const changeTitle = (e: ChangeEvent<HTMLInputElement>) => {
+    const changeTitle = (e: ChangeEvent<HTMLTextAreaElement>) => {
         setValue(e.currentTarget.value)
     }
 
-    return editMode
+    let repl = props.value.replace(/#(\w+)/g, '<b>#$1</b>');
 
-        ? <input
+    return editMode
+        ? <textarea
             className={styles.editableSpanInput}
             value={value}
             autoFocus
             onChange={changeTitle}
             onBlur={activateViewMode}/>
-        //? <InputText value={value} onChange={changeTitle} autoFocus onBlur={activateViewMode} placeholder="Title"/>
-        : <span onDoubleClick={activateEditMode}>{props.value}</span>
+        : <div
+            className={styles.editableSpan}
+            dangerouslySetInnerHTML={{__html: repl}}
+            onDoubleClick={activateEditMode}/>
 });

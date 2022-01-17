@@ -5,16 +5,10 @@ import {Button} from "../common/Button/Button";
 import {NotesTable} from "./NotesTable/NotesTable";
 import {useDispatch} from "react-redux";
 import {setNoteDataTC} from "../../app-reducer";
-
-export function hashtagCreate(text: string) {
-    let hashtags = text.match(/#[a-z]+/gi)
-    if (hashtags === null) {
-        hashtags = []
-    }
-    return hashtags
-}
+import {hashtagCreate} from "../../hashtagCreate/hashtagCreateFunction";
 
 export const Notes = () => {
+
     const dispatch = useDispatch()
     const [title, setTitle] = useState<string>('')
     const [text, setText] = useState<string>('')

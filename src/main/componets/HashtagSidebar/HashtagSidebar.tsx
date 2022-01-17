@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./HashtagSidebar.module.scss"
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../store/store";
-import {InitialStateType, NoteDataType, updateNoteTC} from "../../app-reducer";
+import {InitialStateType, updateNoteTC} from "../../app-reducer";
 import {EditableSpan} from "../common/EditableSpan/EditableSpan";
 import {Button} from "../common/Button/Button";
 import {getNotesDataRequest} from "./hashtag-reducer";
@@ -10,6 +10,7 @@ import {getNotesDataRequest} from "./hashtag-reducer";
 export const HashTagSidebar = () => {
     const dispatch = useDispatch()
     const notesData = useSelector<AppRootStateType, InitialStateType>(state => state.app)
+    const hashFilter = useSelector<AppRootStateType, string>(state => state.hashtag.hashFilter)
 
     let allHashtagsArr: string[] = []
 
@@ -42,29 +43,27 @@ export const HashTagSidebar = () => {
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <Button
-                            classBtn={'btn'}
-                            onClick={() => changeHashFilter('#All')}>
-                            <td className={styles.hashtag}>
+                    <tr className={hashFilter === '#All' ? styles.active : ''}>
+                        <td className={styles.hashtag}>
+                            <Button
+                                classBtn={'hashBtn'}
+                                onClick={() => changeHashFilter('#All')}>
                                 <EditableSpan
                                     value={'#All'}
                                     onChange={changeNoteHash}/>
-                            </td>
-                        </Button>
+                            </Button>
+                        </td>
                     </tr>
                     {sortArr.map((elem, index) => (
-
-                        <tr key={`key_${elem}_${index}`}>
-                            <Button
-                                classBtn={'btn'}
-                                onClick={() => changeHashFilter(elem)}>
-                                <td className={styles.hashtag}>
-                                    <EditableSpan
-                                        value={elem}
-                                        onChange={changeNoteHash}/>
-                                </td>
-                            </Button>
+                        <tr key={`key_${elem}_${index}`}
+                            className={hashFilter === elem ? styles.active : ''}>
+                            <td className={styles.hashtag}>
+                                <Button
+                                    classBtn={'hashBtn'}
+                                    onClick={() => changeHashFilter(elem)}>
+                                    {elem}
+                                </Button>
+                            </td>
                         </tr>
                     ))}
                     </tbody>

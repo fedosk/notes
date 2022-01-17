@@ -5,7 +5,7 @@ import {deleteNoteDataTC, InitialStateType, NoteDataType, updateNoteTC} from "..
 import styles from "./NotesTable.module.scss"
 import {Button} from "../../common/Button/Button";
 import {EditableSpan} from "../../common/EditableSpan/EditableSpan";
-import {hashtagCreate} from "../Notes";
+import {hashtagCreate} from "../../../hashtagCreate/hashtagCreateFunction";
 
 
 export function NotesTable() {
@@ -19,10 +19,11 @@ export function NotesTable() {
     }
 
     const changeNoteHash = (title: string, text: string, id: string, hash: string, idHash: number, index: number) => {
-        let copyNotesData = {...notesData}
-        let changedHashArray = copyNotesData[index].hash
-        changedHashArray[idHash] = hash
-        dispatch(updateNoteTC({name: title, text, id, hash: changedHashArray}))
+        let copyNotesData = [...notesData]
+        let changHashObj = copyNotesData.filter(e => e.id === id)
+        let hashArr =  changHashObj[0].hash
+        hashArr[idHash] = hash
+        dispatch(updateNoteTC({name: title, text, id, hash: hashArr}))
     }
 
     const onDeleteBtnClick = (id: string) => {
@@ -49,7 +50,7 @@ export function NotesTable() {
                 </tr>
                 </thead>
                 <tbody>
-                {filtredNotesData.map((elem: NoteDataType, index) => (
+                {filtredNotesData.reverse().map((elem: NoteDataType, index) => (
                     <tr key={`key_${elem.id}`}>
                         <td className={styles.title}>
                             <b>
@@ -65,20 +66,23 @@ export function NotesTable() {
                         </td>
                         <td className={styles.hashtag}>
                             {elem.hash && elem.hash.map((h, i) =>
-                                <div className={styles.hashtagItem}>
+                                <div
+                                    key={`key_${elem.id}${i}`}
+                                    className={styles.hashtagItem}>
                                     <EditableSpan
-                                        key={`key_${elem.id}${i}`}
                                         value={h}
                                         onChange={(hash) => changeNoteHash(elem.name, elem.text, elem.id, hash, i, index)}/>
                                 </div>)
                             }
                         </td>
                         <td className={styles.actions}>
-                            <Button
-                                classBtn={'bigDeleteBtn'}
-                                onClick={() => onDeleteBtnClick(elem.id)}>
-                                Delete
-                            </Button>
+                            <div>
+                                <Button
+                                    classBtn={'bigDeleteBtn'}
+                                    onClick={() => onDeleteBtnClick(elem.id)}>
+                                    Delete
+                                </Button>
+                            </div>
                         </td>
                     </tr>
                 ))}

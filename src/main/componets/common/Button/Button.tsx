@@ -8,13 +8,14 @@ type SuperButtonPropsType = DefaultButtonPropsType & {
     btn?: boolean
     onClick?: () => void
     classBtn?: string
+    disabled?: boolean
 }
 
 export const Button: React.FC<SuperButtonPropsType> = (
     {
         className, btn,
         color,
-        onClick, classBtn,
+        onClick, classBtn, disabled,
         ...restProps
     }
 ) => {
@@ -42,6 +43,7 @@ export const Button: React.FC<SuperButtonPropsType> = (
         <button
             onClick={onClickCallback}
             className={btnClassName}
+            disabled={disabled}
             {...restProps}
         />
     )

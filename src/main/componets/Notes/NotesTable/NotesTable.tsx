@@ -1,7 +1,7 @@
 import React from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../../store/store";
-import {deleteNoteDataTC, InitialStateType, NoteDataType, updateNoteTC} from "../../../app-reducer";
+import {deleteNoteDataTC, InitialStateType, NoteDataType, updateNoteTC} from "../../../store/app-reducer";
 import styles from "./NotesTable.module.scss"
 import {Button} from "../../common/Button/Button";
 import {EditableSpan} from "../../common/EditableSpan/EditableSpan";
@@ -13,12 +13,12 @@ export function NotesTable() {
     const notesData = useSelector<AppRootStateType, InitialStateType>(state => state.app)
     const hashFilter = useSelector<AppRootStateType, string>(state => state.hashtag.hashFilter)
 
-    const changeNoteData = (title: string, text: string, id: string, hash: string[]) => {
+    const changeNoteData = (title: string, text: string, id: string) => {
         let hashtags = hashtagCreate(text)
         dispatch(updateNoteTC({name: title, text, id, hash: hashtags}))
     }
 
-    const changeNoteHash = (title: string, text: string, id: string, hash: string, idHash: number, index: number) => {
+    const changeNoteHash = (title: string, text: string, id: string, hash: string, idHash: number) => {
         let copyNotesData = [...notesData]
         let changHashObj = copyNotesData.filter(e => e.id === id)
         let hashArr =  changHashObj[0].hash
@@ -56,13 +56,13 @@ export function NotesTable() {
                             <b>
                                 <EditableSpan
                                     value={elem.name}
-                                    onChange={(title) => changeNoteData(title, elem.text, elem.id, elem.hash)}/>
+                                    onChange={(title) => changeNoteData(title, elem.text, elem.id)}/>
                             </b>
                         </td>
                         <td className={styles.text}>
                             <EditableSpan
                                 value={elem.text}
-                                onChange={(text) => changeNoteData(elem.name, text, elem.id, elem.hash)}/>
+                                onChange={(text) => changeNoteData(elem.name, text, elem.id)}/>
                         </td>
                         <td className={styles.hashtag}>
                             {elem.hash && elem.hash.map((h, i) =>
@@ -71,7 +71,7 @@ export function NotesTable() {
                                     className={styles.hashtagItem}>
                                     <EditableSpan
                                         value={h}
-                                        onChange={(hash) => changeNoteHash(elem.name, elem.text, elem.id, hash, i, index)}/>
+                                        onChange={(hash) => changeNoteHash(elem.name, elem.text, elem.id, hash, i)}/>
                                 </div>)
                             }
                         </td>

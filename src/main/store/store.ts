@@ -1,7 +1,7 @@
 import {applyMiddleware, combineReducers, createStore} from 'redux'
 import thunkMiddleware from 'redux-thunk'
-import {appReducer} from "../app-reducer";
-import {hashtagReducer} from "../componets/HashtagSidebar/hashtag-reducer";
+import {appReducer} from "./app-reducer";
+import {hashtagReducer} from "./hashtag-reducer";
 
 
 const rootReducer = combineReducers({

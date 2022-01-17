@@ -2,10 +2,10 @@ import React from "react";
 import styles from "./HashtagSidebar.module.scss"
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../store/store";
-import {InitialStateType, updateNoteTC} from "../../app-reducer";
+import {InitialStateType, updateNoteTC} from "../../store/app-reducer";
 import {EditableSpan} from "../common/EditableSpan/EditableSpan";
 import {Button} from "../common/Button/Button";
-import {getNotesDataRequest} from "./hashtag-reducer";
+import {getNotesDataRequest} from "../../store/hashtag-reducer";
 
 export const HashTagSidebar = () => {
     const dispatch = useDispatch()
@@ -48,9 +48,7 @@ export const HashTagSidebar = () => {
                             <Button
                                 classBtn={'hashBtn'}
                                 onClick={() => changeHashFilter('#All')}>
-                                <EditableSpan
-                                    value={'#All'}
-                                    onChange={changeNoteHash}/>
+                               #All
                             </Button>
                         </td>
                     </tr>

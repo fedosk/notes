@@ -8,7 +8,8 @@ type DefaultInputPropsType = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElem
 type SuperInputTextPropsType = DefaultInputPropsType & {
     onChangeText?: (value: string) => void
     onEnter?: () => void
-    error?: string
+    error?: boolean
+    onErrorChange?: (value: boolean) => void
     spanClassName?: string
     inputStyle?: boolean
     formName?: string
@@ -24,36 +25,28 @@ export const InputText: React.FC<SuperInputTextPropsType> = (
         error,
         className, spanClassName, inputStyle,
         formName, placeholder, value,
+        onErrorChange,
 
         ...restProps
     }
 ) => {
 
     const onChangeCallback = (e: ChangeEvent<HTMLInputElement>) => {
-        onChange
-        && onChange(e)
-
+        onChange && onChange(e)
         onChangeText && onChangeText(e.currentTarget.value)
+        onErrorChange && onErrorChange(false)
     }
 
     const onKeyPressCallback = (e: KeyboardEvent<HTMLInputElement>) => {
         onKeyPress && onKeyPress(e);
-
         onEnter
         && e.key === 'Enter'
         && onEnter()
+        onErrorChange && onErrorChange(false)
     }
 
-    const finalSpanClassName = `${styles.error} ${spanClassName ? spanClassName : ''}`
-    const finalInputClassName = `${styles.errorInput} ${className}`
-    const InputStyleClassName = inputStyle ? styles.inputStyle : ''
-
     return (
-        <div className={styles.inputWrapper}>
-            {error
-                ? <label className={finalSpanClassName} htmlFor={type}>{error}</label>
-                : <label className={styles.label} htmlFor={type}>{formName}</label>
-            }
+        <div className={error ? `${styles.inputWrapper} ${styles.error}` : styles.inputWrapper}>
             <input
                 id={type}
                 type={type}
@@ -61,7 +54,7 @@ export const InputText: React.FC<SuperInputTextPropsType> = (
                 onChange={onChangeCallback}
                 placeholder={placeholder}
                 onKeyPress={onKeyPressCallback}
-                className={`${finalInputClassName} ${InputStyleClassName}`}
+                className={styles.inputStyle}
                 {...restProps}
             />
         </div>

@@ -7,7 +7,6 @@ export type EditableSpanPropsType = {
 }
 
 export const EditableSpan = React.memo(function (props: EditableSpanPropsType) {
-
     let [editMode, setEditMode] = useState(false);
     let [value, setValue] = useState(props.value);
 
@@ -15,15 +14,19 @@ export const EditableSpan = React.memo(function (props: EditableSpanPropsType) {
         setEditMode(true);
         setValue(props.value);
     }
+
     const activateViewMode = () => {
-        setEditMode(false);
-        props.onChange(value);
+        if (value.trim() !== '') {
+            setEditMode(false);
+            props.onChange(value);
+        }
     }
+
     const changeTitle = (e: ChangeEvent<HTMLTextAreaElement>) => {
         setValue(e.currentTarget.value)
     }
 
-    let repl = props.value.replace(/#(\w+)/g, '<b>#$1</b>');
+    let repl = props.value.replace(/#([a-zа-я]+)/gi, '<b>#$1</b>');
 
     return editMode
         ? <textarea
@@ -35,5 +38,5 @@ export const EditableSpan = React.memo(function (props: EditableSpanPropsType) {
         : <div
             className={styles.editableSpan}
             dangerouslySetInnerHTML={{__html: repl}}
-            onDoubleClick={activateEditMode}/>
+            onClick={activateEditMode}/>
 });

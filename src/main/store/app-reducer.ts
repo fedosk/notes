@@ -1,5 +1,5 @@
 import {Dispatch} from "redux";
-import {notesApi} from "../dal/notes-api";
+import {notesApi} from "../../dal/notes-api";
 
 
 const GET_NOTES_DATA = 'GET_NOTES_DATA'

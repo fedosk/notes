@@ -5,7 +5,7 @@ export type InitialStateType = {
 }
 
 const initialState: InitialStateType = {
-    hashFilter: '',
+    hashFilter: '#All',
 }
 
 export const hashtagReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {

@@ -4,12 +4,9 @@ import styles from './InputText.module.scss'
 
 type DefaultInputPropsType = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
 
-
 type SuperInputTextPropsType = DefaultInputPropsType & {
     onChangeText?: (value: string) => void
     onEnter?: () => void
-    error?: boolean
-    onErrorChange?: (value: boolean) => void
     spanClassName?: string
     inputStyle?: boolean
     formName?: string
@@ -22,10 +19,8 @@ export const InputText: React.FC<SuperInputTextPropsType> = (
         type,
         onChange, onChangeText,
         onKeyPress, onEnter,
-        error,
         className, spanClassName, inputStyle,
         formName, placeholder, value,
-        onErrorChange,
 
         ...restProps
     }
@@ -34,7 +29,6 @@ export const InputText: React.FC<SuperInputTextPropsType> = (
     const onChangeCallback = (e: ChangeEvent<HTMLInputElement>) => {
         onChange && onChange(e)
         onChangeText && onChangeText(e.currentTarget.value)
-        onErrorChange && onErrorChange(false)
     }
 
     const onKeyPressCallback = (e: KeyboardEvent<HTMLInputElement>) => {
@@ -42,11 +36,10 @@ export const InputText: React.FC<SuperInputTextPropsType> = (
         onEnter
         && e.key === 'Enter'
         && onEnter()
-        onErrorChange && onErrorChange(false)
     }
 
     return (
-        <div className={error ? `${styles.inputWrapper} ${styles.error}` : styles.inputWrapper}>
+        <div className={styles.inputWrapper}>
             <input
                 id={type}
                 type={type}

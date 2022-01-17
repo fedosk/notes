@@ -43,21 +43,17 @@ export const Notes = () => {
                 <div className={styles.inputsWrapper}>
                     <InputText
                         value={title}
-                        error={errorTitle}
-                        onErrorChange={setTitleError}
                         onChangeText={setTitle}
                         placeholder="Title"/>
                     <InputText
                         value={text}
-                        error={errorText}
-                        onErrorChange={setTextError}
                         onChangeText={setText}
                         placeholder="Note"/>
                 </div>
                 <Button
                     classBtn={"confirmBtn"}
                     onClick={onClickCreateNoteBtn}
-                    disabled={errorTitle || errorText || title.trim() === '' || text.trim() === ''}>
+                    disabled={errorTitle || errorText}>
                     Save
                 </Button>
             </div>

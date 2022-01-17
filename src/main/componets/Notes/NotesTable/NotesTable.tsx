@@ -21,7 +21,7 @@ export function NotesTable() {
     const changeNoteHash = (title: string, text: string, id: string, hash: string, idHash: number) => {
         let copyNotesData = [...notesData]
         let changHashObj = copyNotesData.filter(e => e.id === id)
-        let hashArr =  changHashObj[0].hash
+        let hashArr = changHashObj[0].hash
         hashArr[idHash] = hash
         dispatch(updateNoteTC({name: title, text, id, hash: hashArr}))
     }

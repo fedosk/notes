@@ -43,10 +43,14 @@ export const Notes = () => {
                 <div className={styles.inputsWrapper}>
                     <InputText
                         value={title}
+                        error={errorTitle}
+                        onErrorChange={setTitleError}
                         onChangeText={setTitle}
                         placeholder="Title"/>
                     <InputText
                         value={text}
+                        error={errorText}
+                        onErrorChange={setTextError}
                         onChangeText={setText}
                         placeholder="Note"/>
                 </div>

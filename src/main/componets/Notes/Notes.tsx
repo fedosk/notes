@@ -19,7 +19,7 @@ export const Notes = () => {
 
     useEffect(() => {
         dispatch(getNotesDataTC())
-    }, [])
+    }, [dispatch])
 
     const onClickCreateNoteBtn = () => {
         if (title.trim() !== '' && text.trim() !== '') {

@@ -1,19 +1,13 @@
-.inputWrapper {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: start;
-  margin: 5px;
-
-  .inputStyle {
-    outline: none;
-    width: 500px;
-    height: 28px;
-    font-size: 16px;
-    padding: 15px;
-  }
+.inputStyle {
+  width: 500px;
+  height: 28px;
+  font-size: 16px;
+  padding: 15px;
 }
 
 .error {
   border-bottom: 2px solid #f1453d;
 }
+
+
+

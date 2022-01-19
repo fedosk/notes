@@ -26,7 +26,7 @@ export const EditableSpan = React.memo(function (props: EditableSpanPropsType) {
         setValue(e.currentTarget.value)
     }
 
-    let repl = props.value.replace(/#([a-zа-я]+)/gi, '<b>#$1</b>');
+    let repl = props.value.replace(/#([a-zа-я0-9]+)/gi, '<b>#$1</b>');
 
     return editMode
         ? <textarea
